@@ -1,0 +1,314 @@
+:root {
+  --blue: #1f4fa8;
+  --blue-deep: #173d85;
+  --blue-shadow: #12306a;
+  --paper: #f6f0e3;
+  --canary: #f3d55b;
+  --red: #c8321e;
+  --black: #151210;
+  --salmon: #f2b8a2;
+  --gut: 16px;
+  --bar: 56px;
+  --display: 'TO League', 'Arial Narrow', sans-serif;
+  --gothic: 'TO Gothic', 'Arial', sans-serif;
+  --serif: 'TO Serif', Georgia, serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--blue); }
+body {
+  margin: 0;
+  background: var(--blue);
+  color: var(--paper);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--canary); outline-offset: 3px; }
+[hidden] { display: none !important; }
+
+/* Header */
+.bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(env(safe-area-inset-top) + 10px) calc(var(--gut) + env(safe-area-inset-right)) 6px calc(var(--gut) + env(safe-area-inset-left));
+  min-height: var(--bar);
+}
+.mark {
+  font-family: var(--display);
+  font-size: 38px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.tag {
+  margin: 0;
+  font-family: var(--gothic);
+  font-stretch: 112%;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* The press */
+.press {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 6px calc(var(--gut) + env(safe-area-inset-right)) 40px calc(var(--gut) + env(safe-area-inset-left));
+}
+.stage {
+  position: relative;
+  justify-self: center;
+  width: var(--sheet-w, 330px);
+  height: var(--sheet-h, 519px);
+  touch-action: manipulation;
+}
+.bed {
+  position: absolute;
+  inset: -3.5% -5%;
+  background: #24201d;
+  visibility: hidden;
+}
+.bed canvas { position: absolute; left: 4.545%; top: 3.08%; width: 90.9%; height: 93.85%; }
+.sheet {
+  position: absolute;
+  inset: 0;
+  background: var(--salmon);
+  box-shadow: 7px 9px 0 var(--blue-shadow);
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+.sheet canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.print-view { visibility: hidden; }
+.press[data-mode='pulled'] .print-view { visibility: visible; }
+.loading {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 28px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.ready .loading { display: none; }
+
+/* The desk: lines and choices */
+.desk { display: grid; gap: 14px; align-content: start; max-width: 520px; width: 100%; justify-self: center; }
+.lines-head { display: flex; align-items: center; justify-content: space-between; min-height: 30px; }
+.desk-title { margin: 0; font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1; text-transform: uppercase; }
+.done { display: none; min-height: 44px; padding: 0 18px; border: 0; background: var(--canary); color: var(--black); font-family: var(--gothic); font-weight: 700; font-size: 15px; }
+.lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.line { display: grid; grid-template-columns: 1fr 48px; gap: 6px; }
+.line input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 2px 12px 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--blue-deep);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 27px;
+  line-height: 1;
+  text-transform: uppercase;
+  scroll-margin: 24px;
+}
+.line input::placeholder { color: rgba(246, 240, 227, 0.45); }
+.line input:focus { outline: none; box-shadow: inset 0 -4px 0 var(--canary); background: #1a438f; }
+.ink-toggle {
+  height: 48px;
+  border: 0;
+  background: var(--stock, var(--salmon));
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.ink-toggle span { width: 20px; height: 20px; border-radius: 50%; background: var(--dot, var(--black)); }
+.ink-toggle[aria-pressed='true'] span { width: 26px; height: 26px; }
+.hint { margin: -4px 0 0; font-size: 14px; opacity: 0.85; }
+
+.choices { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: end; }
+.pick { border: 0; margin: 0; padding: 0; min-width: 0; }
+.pick legend { padding: 0; margin-bottom: 4px; font-family: var(--gothic); font-stretch: 78%; font-weight: 700; font-size: 15px; }
+.swatches { display: flex; flex-wrap: nowrap; gap: 2px; margin-left: -7px; }
+.swatch {
+  width: 44px; height: 44px; padding: 0; border: 0; background: transparent;
+  display: grid; place-items: center;
+}
+.swatch i { width: 30px; height: 30px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.12); position: relative; overflow: hidden; }
+.swatch i b { position: absolute; right: 0; bottom: 0; width: 50%; height: 100%; background: var(--c2); }
+.swatch[aria-pressed='true'] i { box-shadow: 0 0 0 3px var(--paper); }
+#shuffle { flex: 1 1 100%; }
+
+.btn {
+  min-height: 48px;
+  padding: 0 14px;
+  font-stretch: 78%;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--gothic);
+  font-weight: 700;
+  font-size: 16px;
+}
+.btn.ghost { background: transparent; box-shadow: inset 0 0 0 2px var(--paper); color: var(--paper); }
+.btn.ghost:active { background: var(--blue-deep); }
+.btn.pull {
+  width: 100%;
+  min-height: 60px;
+  background: var(--canary);
+  color: var(--black);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 32px;
+  text-transform: uppercase;
+  line-height: 1;
+  padding-top: 3px;
+  box-shadow: 5px 6px 0 var(--blue-shadow);
+}
+.btn.pull:active { transform: translate(3px, 4px); box-shadow: 2px 2px 0 var(--blue-shadow); }
+.btn:disabled { cursor: default; }
+.btn.pull:disabled { transform: translate(3px, 4px); box-shadow: 2px 2px 0 var(--blue-shadow); }
+.actions { display: grid; gap: 10px; }
+.actions .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.status { margin: 0; min-height: 1.5em; font-size: 14px; }
+
+/* Sections */
+.craft, .prices, .foot { padding: 44px calc(var(--gut) + env(safe-area-inset-right)) 48px calc(var(--gut) + env(safe-area-inset-left)); }
+.craft { background: var(--canary); color: var(--black); }
+.craft h2, .prices h2 {
+  margin: 0 0 22px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(52px, 15vw, 120px);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.craft-body { display: grid; gap: 14px; max-width: 64ch; }
+.craft-body p { margin: 0; }
+.prices { background: var(--red); color: var(--paper); }
+.price-list { margin: 0; display: grid; gap: 0; max-width: 720px; }
+.price-list div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding: 12px 0; border-top: 3px solid var(--paper); }
+.price-list div:last-child { border-bottom: 3px solid var(--paper); }
+.price-list dt { font-family: var(--gothic); font-weight: 700; }
+.price-list dd { margin: 0; }
+.note { margin: 18px 0 0; max-width: 60ch; }
+.foot { background: var(--black); color: var(--paper); padding-top: 28px; padding-bottom: calc(28px + env(safe-area-inset-bottom)); font-size: 15px; }
+.foot p { margin: 0 0 6px; }
+.foot a { color: var(--paper); text-underline-offset: 3px; }
+
+/* Phone editing: the press becomes a sheet sized to the visible viewport, poster on top. */
+.editing .press {
+  position: fixed;
+  left: 0; right: 0;
+  top: var(--vv-top, 0px);
+  height: var(--vv-h, 100dvh);
+  z-index: 10;
+  background: var(--blue);
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  padding-top: calc(env(safe-area-inset-top) + 10px);
+  padding-bottom: 0;
+  overflow: hidden;
+}
+.editing .desk { overflow-y: auto; align-content: start; padding-bottom: 24px; overscroll-behavior: contain; }
+.editing .done { display: block; }
+.editing .lines-head { position: sticky; top: 0; z-index: 1; background: var(--blue); padding-bottom: 6px; }
+.editing .choices, .editing .actions, .editing .hint, .editing .status { display: none; }
+.editing .sheet { box-shadow: 4px 5px 0 var(--blue-shadow); }
+
+/* Attract mode: only the press. On narrow screens only the line being typed. */
+.attract .line[data-active] input { box-shadow: inset 0 -4px 0 var(--canary); }
+@media (max-width: 899px) {
+  .attract .line:not([data-active]) { display: none; }
+  .attract .desk { gap: 10px; }
+}
+.attract .bar, .attract .craft, .attract .prices, .attract .foot, .attract .choices, .attract .hint, .attract .status, .attract #afterActions, .attract .lines-head { display: none !important; }
+.attract #setActions { display: grid !important; }
+.attract .press { min-height: 100dvh; align-content: center; padding-top: 16px; padding-bottom: 16px; }
+
+@media (min-width: 768px) {
+  :root { --gut: 32px; }
+  .mark { font-size: 46px; }
+  .tag { font-size: 15px; }
+  .craft-body { grid-template-columns: repeat(3, 1fr); max-width: none; gap: 28px; }
+}
+
+@media (min-width: 900px) {
+  .press {
+    grid-template-columns: auto minmax(320px, 440px);
+    justify-content: center;
+    align-items: start;
+    gap: 56px;
+    padding-top: 12px;
+    padding-bottom: 56px;
+  }
+  .desk { padding-top: 4px; }
+  .attract .press { align-items: center; }
+  .attract .line input, .attract .ink-toggle { height: 60px; }
+  .attract .line input { font-size: 36px; }
+  .attract .line { grid-template-columns: 1fr 60px; }
+  .attract .btn.pull { min-height: 76px; font-size: 42px; }
+  .attract .desk { gap: 18px; }
+}
+
+/* A computer's window is often short: a laptop leaves 580 to 700 px under the browser's own
+   bars. The desk tightens there, so the whole of it, down to "Pull the print", is on the first
+   screen beside the poster (it used to end below the fold on anything under about 800 px). */
+@media (min-width: 900px) and (max-height: 800px) {
+  .desk { gap: 8px; }
+  .lines-head { min-height: 24px; }
+  .desk-title { font-size: 24px; }
+  .lines { gap: 4px; }
+  .line { grid-template-columns: 1fr 38px; gap: 4px; }
+  .line input, .ink-toggle { height: 38px; }
+  .line input { font-size: 22px; }
+  .ink-toggle span { width: 16px; height: 16px; }
+  .ink-toggle[aria-pressed='true'] span { width: 22px; height: 22px; }
+  .hint { font-size: 13px; margin-top: -2px; }
+  .choices { gap: 6px 24px; }
+  .pick legend { margin-bottom: 0; font-size: 14px; }
+  .swatch { width: 38px; height: 38px; }
+  .swatch i { width: 26px; height: 26px; }
+  .btn { min-height: 40px; }
+  .btn.pull { min-height: 50px; font-size: 28px; }
+  .actions { gap: 8px; }
+  .status { min-height: 0; }
+}
+@media (min-width: 900px) and (max-height: 640px) {
+  .line { grid-template-columns: 1fr 33px; }
+  .line input, .ink-toggle { height: 33px; }
+  .line input { font-size: 19px; }
+  .btn { min-height: 36px; }
+  .btn.pull { min-height: 46px; font-size: 26px; }
+  .actions { gap: 6px; }
+  /* with the print pulled there are three buttons where there was one: the line about tapping a
+     line (which no longer applies) makes room for them */
+  .press[data-mode='pulled'] .hint { display: none; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .bar { position: absolute; left: 0; right: 0; top: 0; z-index: 2; pointer-events: none; padding-top: 8px; }
+  .bar .mark { pointer-events: auto; font-size: 28px; }
+  .bar .tag { display: none; }
+  .press { grid-template-columns: auto 1fr; align-items: start; gap: 24px; padding-top: 8px; }
+  .stage { justify-self: start; margin-left: 116px; }
+  .desk { padding-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn.pull:active { transform: none; }
+}

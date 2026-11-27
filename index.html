@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tall Order, show posters from wood type</title>
+<meta name="description" content="Tall Order is a letterpress shop that prints show posters from wood type. Type a few lines, watch the poster set itself edge to edge, then pull the print.">
+<meta name="theme-color" content="#1f4fa8">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+<div class="page" id="page">
+  <header class="bar">
+    <a class="mark" href="#press" aria-label="Tall Order, back to the press">Tall Order</a>
+    <p class="tag">Wood type show posters</p>
+  </header>
+
+  <main id="press" class="press" data-mode="set">
+    <div class="stage" id="stage">
+      <div class="bed" id="bed" aria-hidden="true"><canvas id="forme"></canvas></div>
+      <div class="sheet" id="sheet">
+        <canvas id="proof" role="img" aria-label="The poster, set from your lines"></canvas>
+        <canvas id="printView" class="print-view" aria-hidden="true"></canvas>
+      </div>
+      <p class="loading" id="loading">Setting the type</p>
+    </div>
+
+    <div class="desk" id="desk">
+      <div class="lines-head">
+        <h2 class="desk-title" id="linesTitle">Your lines</h2>
+        <button class="done" id="done" type="button">Done</button>
+      </div>
+      <ol class="lines" id="lines" aria-labelledby="linesTitle"></ol>
+      <p class="hint" id="hint">Tap a line on the poster to print it in the second ink.</p>
+
+      <div class="choices" id="choices">
+        <fieldset class="pick">
+          <legend>Paper</legend>
+          <div class="swatches" id="stocks"></div>
+        </fieldset>
+        <fieldset class="pick">
+          <legend>Ink</legend>
+          <div class="swatches" id="inks"></div>
+        </fieldset>
+        <button class="btn ghost" id="shuffle" type="button">Shuffle the faces</button>
+      </div>
+
+      <div class="actions" id="setActions">
+        <button class="btn pull" id="pull" type="button">Pull the print</button>
+      </div>
+      <div class="actions after" id="afterActions" hidden>
+        <button class="btn pull" id="save" type="button">Save the print</button>
+        <div class="row">
+          <button class="btn ghost" id="again" type="button">Pull another</button>
+          <button class="btn ghost" id="change" type="button">Change the type</button>
+        </div>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </div>
+  </main>
+
+  <section class="craft" id="craft">
+    <h2>How a show poster is set</h2>
+    <div class="craft-body">
+      <p>Every line on a show poster runs the full width of the sheet. The compositor picks a face and a size for each line until it reaches both edges, so a short line comes out big and a long one gets set in a condensed face. The stack is built until it fills the sheet from top to bottom.</p>
+      <p>The lines are locked into a forme on the bed of the press, inked with a roller, and the paper is pressed down onto them. Big wooden letters never print perfectly flat. The grain shows, the ink thins in the middle and gathers at the edges, and no two pulls come out quite the same.</p>
+      <p>A second color means a second run through the press, which is why it never sits exactly where the first one did.</p>
+    </div>
+  </section>
+
+  <section class="prices" id="prices">
+    <h2>Sizes and prices</h2>
+    <dl class="price-list">
+      <div><dt>Window card, 14 by 22 inches</dt><dd>100 prints for $180</dd></div>
+      <div><dt>Half sheet, 22 by 28 inches</dt><dd>100 prints for $260</dd></div>
+      <div><dt>One sheet, 28 by 42 inches</dt><dd>100 prints for $390</dd></div>
+      <div><dt>Second color</dt><dd>$60 a run</dd></div>
+    </dl>
+    <p class="note">One color on any stock in the shop. Bring your copy by Thursday for posters the next week.</p>
+  </section>
+
+  <footer class="foot">
+    <p>Concept project. Tall Order is a fictional brand.</p>
+    <p><a href="https://michaelshadpour.com" target="_blank" rel="noopener">Design and build: Michael Shadpour</a></p>
+  </footer>
+</div>
+<script type="module" src="./src/main.ts"></script>
+</body>
+</html>

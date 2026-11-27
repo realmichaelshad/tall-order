@@ -1,0 +1,37 @@
+{
+  "name": "tall-order",
+  "version": "1.0.0",
+  "description": "Type a few lines and a wood type show poster sets itself, then pull it.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "node scripts/serve.mjs",
+    "test": "vitest run",
+    "test:e2e": "npm run build && playwright test",
+    "perf": "node scripts/perf.mjs"
+  },
+  "license": "MIT",
+  "author": "Michael Shadpour (https://michaelshadpour.com)",
+  "homepage": "https://michaelshadpour.com/work/tall-order",
+  "repository": "github:realmichaelshad/tall-order",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^24.19.2",
+    "typescript": "^7.0.2",
+    "vite": "^6.4.6",
+    "vitest": "^5.1.1"
+  },
+  "dependencies": {
+    "@fontsource-variable/league-gothic": "^5.3.0",
+    "@fontsource-variable/roboto-serif": "^5.3.0",
+    "@fontsource-variable/science-gothic": "^5.3.0",
+    "@fontsource/abril-fatface": "^5.3.0",
+    "@fontsource/holtwood-one-sc": "^5.3.0",
+    "@fontsource/rye": "^5.3.0",
+    "@fontsource/six-caps": "^5.3.0",
+    "@fontsource/ultra": "^5.3.0",
+    "fontkit": "^3.0.0"
+  },
+  "private": true
+}
